@@ -15,16 +15,16 @@ A library with the logic needed to increment counters and progress bars
 
 ```js
 const counter = new JsCounter({
-	from: 0, 
-	to: 100,
-	max: 100,
-	step: 1,
-	interval: 100, 
-	wait: 0,
-	target: {
-		selector: '#progressText',
-		type: 'text',
-	},
+  from: 0, 
+  to: 100,
+  max: 100,
+  step: 1,
+  interval: 100, 
+  wait: 0,
+  target: {
+    selector: '#progressText',
+    type: 'text',
+  },
 });
 ```
 3. Start!
@@ -32,6 +32,8 @@ const counter = new JsCounter({
 ```js
 counter.start()
 ```
+
+> Tip: You can store the counter instance in a variable to programmatically start (as above), or start the counter without having to assign it to a variable: `new JsCounter(options).start()`
 
 ## Counter Options
 
@@ -59,27 +61,27 @@ onUpdate: (data) => {
 
 Option | Type | Default | Description
 --- | --- | --- | --- |
-`selector` | `String` | null | DOM element selector that should be manipulated. Something like `#progress` or `.counter`
-`type` | `String` | 'text' | Kind of manipulation. `style` or `text`
-`property` | `String` | 'width' | CSS property that must be changed (will be manipulated with `setProperty`)
-`unit` | `String` | '%' | CSS property unit
-`percentage` | `Boolean` | true | Whether you want to display the number in percentage or the real number. For example: a progress bar containing the steps of a wizard that goes from 0 to 5. When you get halfway through the progress bar, do you want to display 3 or 50%?
+`selector` | `String` | `null` | DOM element selector that should be manipulated. Something like `#progress` or `.counter`
+`type` | `String` | `'text'` | Kind of manipulation. `style` or `text`
+`property` | `String` | `'width'` | CSS property that must be changed (will be manipulated with `setProperty`)
+`unit` | `String` | `'%'` | CSS property unit
+`percentage` | `Boolean` | `true` | Whether you want to display the number in percentage or the real number. For example: a progress bar containing the steps of a wizard that goes from 0 to 5. When you get halfway through the progress bar, do you want to display 3 or 50%?
 
 ### Example for manipulating a progress bar
-```
-{
-	selector: '#progressBar #bar',
-	property: 'width',
-	type: 'style',
-	unit: '%'
+```js
+const target = {
+  selector: '#progressBar #bar',
+  property: 'width',
+  type: 'style',
+  unit: '%'
 },
 ```
 
 ### Example for manipulating a text
-```
-{
-	selector: '#progressCircle text',
-	type: 'text',
-	percentage: true
+```js
+const target = {
+  selector: '#progressCircle text',
+  type: 'text',
+  percentage: true
 },
 ```

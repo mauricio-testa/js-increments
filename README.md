@@ -1,11 +1,13 @@
 # JSCounter
-A library with the logic needed to increment counters and progress bars
+A small library with the logic needed to increment counters and progress bars
 
 ![Size](https://img.shields.io/github/size/mauricio-testa/js-counter/dist/index.min.js)
 ![Language](https://img.shields.io/github/languages/top/mauricio-testa/js-counter)
 ![Last commit](https://img.shields.io/github/last-commit/mauricio-testa/js-counter)
 
 ## How to use
+
+> If you think it is better to learn from examples, download this project to your computer and open `/examples/index.html`.
 
 1. Add to your document 
 ```html

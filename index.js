@@ -3,74 +3,74 @@
  */
 
 class Target {
-	constructor(params, counterOptions) {
-		const defaults = {
-			selector: null, 
-			property: 'width', 
-			type: 'text', 
-			unit: '%',
-			percentage: true,
-		};
+  constructor(params, counterOptions) {
+    const defaults = {
+      selector: null,
+      property: 'width',
+      type: 'text',
+      unit: '%',
+      percentage: true,
+    };
 
-		this.counterOptions = counterOptions
-		this.options = {...defaults, ...params};
-	}
+    this.counterOptions = counterOptions
+    this.options = { ...defaults, ...params };
+  }
 
-	/**
-	 * Update DOM element as counter updates
-	 */
+  /**
+   * Update DOM element as counter updates
+   */
 
-	get update() {
-		switch (this.options.type) {
-			case 'text':
-				return function(value) {
-					const _value = this.options.percentage ? (value * 100 / this.counterOptions.max) : value
-					this.element.textContent = `${Math.round(_value)} ${this.options.percentage ? '%' : ''}` 
-				}
-		
-			case 'style':
-				return function(value) {
-					this.element.style.setProperty(this.options.property, (value * 100 / this.counterOptions.max) + this.options.unit );
-				}
-		}
-	}
+  get update() {
+    switch (this.options.type) {
+      case 'text':
+        return function (value) {
+          const _value = this.options.percentage ? (value * 100 / this.counterOptions.max) : value
+          this.element.textContent = `${Math.round(_value)} ${this.options.percentage ? '%' : ''}`
+        }
 
-	/**
-	 * Returns the target's DOM element
-	 */
+      case 'style':
+        return function (value) {
+          this.element.style.setProperty(this.options.property, (value * 100 / this.counterOptions.max) + this.options.unit);
+        }
+    }
+  }
 
-	get element() {
-		return document.querySelector(this.options.selector)
-	}
+  /**
+   * Returns the target's DOM element
+   */
 
-	/**
-	 * Returns if target is valid
-	 */
+  get element() {
+    return document.querySelector(this.options.selector)
+  }
 
-	get valid() {
+  /**
+   * Returns if target is valid
+   */
 
-		try {
-			if (!this.options.selector)
-				throw new Error('Selector not found');
+  get valid() {
 
-			if (!this.element) 
-				throw new Error('No DOM element found for selector ' + this.options.selector);
+    try {
+      if (!this.options.selector)
+        throw new Error('Selector not found');
 
-			if (!['text', 'style'].includes(this.options.type))
-				throw new Error('Invalid target type' + this.options.type);
+      if (!this.element)
+        throw new Error('No DOM element found for selector ' + this.options.selector);
 
-			if (this.options.type == 'text' && this.options.percentage && !this.counterOptions.max) 
-				throw new Error('No maximum value provided for percentage calculation');
+      if (!['text', 'style'].includes(this.options.type))
+        throw new Error('Invalid target type' + this.options.type);
 
-			if (this.options.type == 'style' && !this.options.property)
-				throw new Error('No CSS property provided');
-		} 
-		catch (error) {
-			console.error(this, error.message)
-			return;
-		}
-		return true
-	}
+      if (this.options.type == 'text' && this.options.percentage && !this.counterOptions.max)
+        throw new Error('No maximum value provided for percentage calculation');
+
+      if (this.options.type == 'style' && !this.options.property)
+        throw new Error('No CSS property provided');
+    }
+    catch (error) {
+      console.error(this, error.message)
+      return;
+    }
+    return true
+  }
 }
 
 /**
@@ -78,95 +78,95 @@ class Target {
  */
 
 class Counter {
-	constructor(params) {
-		const defaults = {
-			from: 0, 
-			to: 100, 
-			interval: 50, 
-			wait: 0,
-			max: 100,
-			step: 1,
+  constructor(params) {
+    const defaults = {
+      from: 0,
+      to: 100,
+      interval: 50,
+      wait: 0,
+      max: 100,
+      step: 1,
 
-			target: false,
-			targets: [],
+      target: false,
+      targets: [],
 
-			onStart: null,
-			onUpdate: null,
-			onFinish: null,
-		};
+      onStart: null,
+      onUpdate: null,
+      onFinish: null,
+    };
 
-		this.options = {...defaults, ...params};
-		this.targets = [];
-		
-		if (this.options.target) this.options.targets.push(this.options.target)
+    this.options = { ...defaults, ...params };
+    this.targets = [];
 
-		this.options.targets.forEach(target => {
-			const targetInstance = new Target(target, this.options)
-			if (targetInstance.valid)
-			this.targets.push(targetInstance)
-		});
-	}
+    if (this.options.target) this.options.targets.push(this.options.target)
 
-	/**
-	 * Start the counter
-	 */
+    this.options.targets.forEach(target => {
+      const targetInstance = new Target(target, this.options)
+      if (targetInstance.valid)
+        this.targets.push(targetInstance)
+    });
+  }
 
-	start() {
+  /**
+   * Start the counter
+   */
 
-		if (!this.targets.length) {
-			throw new Error('There are no valid targets')
-		}
+  start() {
 
-		this._fireEvent('onStart')
+    if (!this.targets.length) {
+      throw new Error('There are no valid targets')
+    }
 
-		//start progress with `from` value
-		this.counter = this.options.from;
-		this._updateElement()
+    this._fireEvent('onStart')
 
-		// execute counter
-		const vm = this
-		setTimeout(function(){
-			var id = setInterval(function(){
-				if (vm.counter === vm.options.to) {
-					clearInterval(id);
-					vm._fireEvent('onFinish')
-				} else {
-					// `to` is not a multiple of `step`
-					if (vm.options.to && (vm.counter + vm.options.step) > vm.options.to) {
-						vm.counter = vm.options.to
-					}
-					else {
-						vm.counter += vm.options.step;
-					}
-					vm._updateElement()
-				}
-			}, vm.options.interval);
-		}, vm.options.wait)
-	}
+    //start progress with `from` value
+    this.counter = this.options.from;
+    this._updateElement()
 
-	/**
-	 * Update the element with counter value
-	 */
+    // execute counter
+    const vm = this
+    setTimeout(function () {
+      var id = setInterval(function () {
+        if (vm.counter === vm.options.to) {
+          clearInterval(id);
+          vm._fireEvent('onFinish')
+        } else {
+          // `to` is not a multiple of `step`
+          if (vm.options.to && (vm.counter + vm.options.step) > vm.options.to) {
+            vm.counter = vm.options.to
+          }
+          else {
+            vm.counter += vm.options.step;
+          }
+          vm._updateElement()
+        }
+      }, vm.options.interval);
+    }, vm.options.wait)
+  }
 
-	_updateElement() {
-		this._fireEvent('onUpdate')
+  /**
+   * Update the element with counter value
+   */
 
-		this.targets.forEach(target => {
-			target.update(this.counter)
-		});
-	}
+  _updateElement() {
+    this._fireEvent('onUpdate')
 
-	/**
-	 * Triggers user event callbacks
-	 * @param {String} event 
-	 */
+    this.targets.forEach(target => {
+      target.update(this.counter)
+    });
+  }
 
-	_fireEvent(event) {
-		if (this.options.hasOwnProperty(event) && typeof this.options[event] == 'function') {
-			this.options[event](this)
-		}
-	}
-	
+  /**
+   * Triggers user event callbacks
+   * @param {String} event 
+   */
+
+  _fireEvent(event) {
+    if (this.options.hasOwnProperty(event) && typeof this.options[event] == 'function') {
+      this.options[event](this)
+    }
+  }
+
 }
 
 window.JsCounter = Counter

@@ -56,7 +56,7 @@ Option | Type | Default | Description
 > The `onStart`, `onUpdate` and `onFinish` callbacks receives the counter instance as a parameter
 ```
 onUpdate: (data) => {
-	console.log('updated', data.counter)
+  console.log('updated', data.counter)
 },
 ```
 ## Target Options

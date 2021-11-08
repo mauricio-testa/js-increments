@@ -59,16 +59,18 @@ class Target {
       if (!['text', 'style'].includes(this.options.type))
         throw new Error('Invalid target type' + this.options.type);
 
-      if (this.options.type == 'text' && this.options.percentage && !this.counterOptions.max)
-        throw new Error('No maximum value provided for percentage calculation');
+      if (this.options.type == 'text' && this.options.percentage && (!this.counterOptions.max || this.counterOptions.max < this.counterOptions.to))
+        throw new Error('The max value is invalid, missing, or less than `to`');
 
       if (this.options.type == 'style' && !this.options.property)
         throw new Error('No CSS property provided');
     }
+
     catch (error) {
       console.error(this, error.message)
       return;
     }
+    
     return true
   }
 }

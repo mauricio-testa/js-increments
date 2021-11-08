@@ -40,9 +40,7 @@ class Counter {
 
   start() {
 
-    if (!this.targets.length) {
-      throw new Error('There are no valid targets')
-    }
+    if (!this.valid) return;
 
     this._fireEvent('onStart')
 
@@ -92,6 +90,30 @@ class Counter {
     if (this.options.hasOwnProperty(event) && typeof this.options[event] == 'function') {
       this.options[event](this)
     }
+  }
+
+  get valid() {
+
+    try {
+      if (!this.targets.length)
+        throw new Error('There are no valid targets')
+
+      if (this.options.to < this.options.from)
+        throw new Error('The value of `to` must be greater than `from`');
+
+      const mustBeInteger = ['from', 'to', 'interval', 'wait', 'max', 'step']
+      mustBeInteger.forEach(key => {
+        if (isNaN(this.options[key]))
+        throw new Error('The value of ' + key + ' is not a number');
+      })
+    }
+
+    catch (error) {
+      console.error(this, error.message)
+      return;
+    }
+
+    return true
   }
 
 }

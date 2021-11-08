@@ -25,7 +25,7 @@ class Target {
       case 'text':
         return function (value) {
           const _value = this.options.percentage ? (value * 100 / this.counterOptions.max) : value
-          this.element.textContent = `${Math.round(_value)} ${this.options.percentage ? '%' : ''}`
+          this.element.textContent = `${Math.round(_value)}${this.options.percentage ? '%' : ''}`
         }
 
       case 'style':
@@ -59,8 +59,8 @@ class Target {
       if (!['text', 'style'].includes(this.options.type))
         throw new Error('Invalid target type' + this.options.type);
 
-      if (this.options.type == 'text' && this.options.percentage && (!this.counterOptions.max || this.counterOptions.max < this.counterOptions.to))
-        throw new Error('The max value is invalid, missing, or less than `to`');
+      if (this.options.percentage && !this.counterOptions.max)
+        throw new Error('The max value is required');
 
       if (this.options.type == 'style' && !this.options.property)
         throw new Error('No CSS property provided');
@@ -70,7 +70,7 @@ class Target {
       console.error(this, error.message)
       return;
     }
-    
+
     return true
   }
 }

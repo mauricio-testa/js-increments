@@ -1,16 +1,26 @@
 {
   "name": "js-counter",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "private": false,
+  "description": "A small library with the logic needed to increment counters and progress bars",
+  "homepage": "https://github.com/mauricio-testa/js-counter",
+  "author": "mauricio-testa",
+  "license": "MIT",
+  "main": "dist/index.min.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mauricio-testa/js-counter.git"
+  },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.2"
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
   }
 }

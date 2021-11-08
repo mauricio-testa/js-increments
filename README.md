@@ -1,22 +1,31 @@
-# JSCounter
+# jsCounter
 A small library with the logic needed to increment counters and progress bars
 
 ![Size](https://img.shields.io/github/size/mauricio-testa/js-counter/dist/index.min.js)
 ![Language](https://img.shields.io/github/languages/top/mauricio-testa/js-counter)
 ![Last commit](https://img.shields.io/github/last-commit/mauricio-testa/js-counter)
 
-## How to use
+## Installation
 
-> If you think it is better to learn from examples, download this project to your computer and open `/examples/index.html`.
+### Browser
 
-1. Add to your document 
 ```html
 <script src="PATH_TO_LIB/dist/index.min.js"></script>
 ```
-2. Configure options
+
+### Node.js
+
+```bash
+npm i js-counter
+```
 
 ```js
-const counter = new JsCounter({
+import jsCounter from 'js-counter'
+```
+
+## How to use
+```js
+const counter = new jsCounter({
   from: 0, 
   to: 100,
   max: 100,
@@ -28,14 +37,13 @@ const counter = new JsCounter({
     type: 'text',
   },
 });
-```
-3. Start!
 
-```js
-counter.start()
+counter.start();
+
+// or new jsCounter(options).start()
 ```
 
-> Tip: You can store the counter instance in a variable to programmatically start (as above), or start the counter without having to assign it to a variable: `new JsCounter(options).start()`
+> If you think it is better to learn from examples, download this project to your computer and open `/examples/index.html`.
 
 ## Counter Options
 

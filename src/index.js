@@ -1,5 +1,5 @@
 import Counter from './classes/Counter'
 
-window.jsCounter = Counter;
+window.jsIncrements = Counter;
 
 export default Counter

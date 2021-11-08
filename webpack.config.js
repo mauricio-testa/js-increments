@@ -6,7 +6,7 @@ module.exports = {
   output: {
     filename: 'index.min.js',
     path: path.resolve(__dirname, 'dist'),
-    library: "js-counter",
+    library: "js-increments",
     libraryTarget: "umd" 
   },
 };

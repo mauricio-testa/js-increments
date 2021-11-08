@@ -1,9 +1,9 @@
-# jsCounter
+# jsIncrements
 A small library with the logic needed to increment counters and progress bars
 
-![Size](https://img.shields.io/github/size/mauricio-testa/js-counter/dist/index.min.js)
-![Language](https://img.shields.io/github/languages/top/mauricio-testa/js-counter)
-![Last commit](https://img.shields.io/github/last-commit/mauricio-testa/js-counter)
+![Size](https://img.shields.io/github/size/mauricio-testa/js-increments/dist/index.min.js)
+![Language](https://img.shields.io/github/languages/top/mauricio-testa/js-increments)
+![Last commit](https://img.shields.io/github/last-commit/mauricio-testa/js-increments)
 
 ## Installation
 
@@ -16,16 +16,16 @@ A small library with the logic needed to increment counters and progress bars
 ### Node.js
 
 ```bash
-npm i js-counter
+npm i js-increments
 ```
 
 ```js
-import jsCounter from 'js-counter'
+import jsIncrements from 'js-increments'
 ```
 
 ## How to use
 ```js
-const counter = new jsCounter({
+const counter = new jsIncrements({
   from: 0, 
   to: 100,
   max: 100,
@@ -40,7 +40,7 @@ const counter = new jsCounter({
 
 counter.start();
 
-// or new jsCounter(options).start()
+// or new jsIncrements(options).start()
 ```
 
 > If you think it is better to learn from examples, download this project to your computer and open `/examples/index.html`.

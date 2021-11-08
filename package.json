@@ -1,9 +1,9 @@
 {
-  "name": "js-counter",
+  "name": "js-increments",
   "version": "0.1.0",
   "private": false,
   "description": "A small library with the logic needed to increment counters and progress bars",
-  "homepage": "https://github.com/mauricio-testa/js-counter",
+  "homepage": "https://github.com/mauricio-testa/js-increments",
   "author": "mauricio-testa",
   "license": "MIT",
   "main": "dist/index.min.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mauricio-testa/js-counter.git"
+    "url": "https://github.com/mauricio-testa/js-increments.git"
   },
   "devDependencies": {
     "webpack": "^5.62.1",

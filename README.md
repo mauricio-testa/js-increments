@@ -15,10 +15,10 @@ See a [Demo](https://js-increments.netlify.app/)
 
 ```html
 <!-- self hosted -->
-<script src="PATH_TO_LIB/dist/index.min.js"></script>
+<script src="<PATH>/dist/index.min.js"></script>
 
 <!-- CDN -->
-<script src="https://cdn.jsdelivr.net/npm/js-increments@0.1.0/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-increments@<VERSION>/dist/index.min.js"></script>
 ```
 
 ### Node.js

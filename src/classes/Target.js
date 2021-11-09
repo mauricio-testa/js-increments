@@ -49,27 +49,17 @@ class Target {
 
   get valid() {
 
-    try {
-      if (!this.options.selector)
-        throw new Error('Selector not found');
+    if (!this.options.selector)
+      throw new Error('SELECTOR_NOT_FOUND');
 
-      if (!this.element)
-        throw new Error('No DOM element found for selector ' + this.options.selector);
+    if (!this.element)
+      throw new Error('NO_DOM_ELEMENT_FOUND_FOR_THE_SELECTOR');
 
-      if (!['text', 'style'].includes(this.options.type))
-        throw new Error('Invalid target type' + this.options.type);
+    if (!['text', 'style'].includes(this.options.type))
+      throw new Error('INVALID_TARGET_TYPE');
 
-      if (this.options.percentage && !this.counterOptions.max)
-        throw new Error('The max value is required');
-
-      if (this.options.type == 'style' && !this.options.property)
-        throw new Error('No CSS property provided');
-    }
-
-    catch (error) {
-      console.error(this, error.message)
-      return;
-    }
+    if (this.options.type == 'style' && !this.options.property)
+      throw new Error('NO_CSS_PROPERTY_PROVIDED');
 
     return true
   }

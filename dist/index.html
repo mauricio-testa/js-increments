@@ -8,7 +8,7 @@
   <title>Document</title>
   <style>
     * {
-      transition: .4s;
+      transition: 1000ms;
     }
 
     body {
@@ -65,12 +65,10 @@
       width: 0;
       height: 20px;
       position: absolute;
-      transition: 1s;
     }
 
     #progressCircle circle {
       --circunference: calc(var(--radius) * 2 * 3.14);
-      transition: 0.35s stroke-dashoffset;
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
       stroke: #4CAF50;

@@ -94,31 +94,24 @@ class Counter {
 
   get valid() {
 
-    try {
-      const mustBeNumber = ['from', 'to', 'interval', 'wait', 'max', 'step']
-      mustBeNumber.forEach(key => {
-        if (isNaN(this.options[key])) {
-          throw new Error('The value of `' + key + '` is not a number');
-        }
-        else {
-          this.options[key] = parseInt(this.options[key])
-        }
-      })
+    const mustBeNumber = ['from', 'to', 'interval', 'wait', 'max', 'step']
+    mustBeNumber.forEach(key => {
+      if (isNaN(this.options[key])) {
+        throw new Error(key.toUpperCase() + '_IS_NAN');
+      }
+      else {
+        this.options[key] = parseInt(this.options[key])
+      }
+    })
 
-      if (!this.targets.length)
-        throw new Error('There are no valid targets')
+    if (!this.targets.length)
+      throw new Error('NO_VALID_TARGETS')
 
-      if (this.options.to < this.options.from)
-        throw new Error('The value of `to` must be greater than `from`');
+    if (this.options.to < this.options.from)
+      throw new Error('TO_MUST_BE_GREATER_THAN_FROM');
 
-      if (this.options.max < this.options.to)
-        this.options.max = this.options.to
-    }
-
-    catch (error) {
-      console.error(this, error.message)
-      return;
-    }
+    if (!this.options.max || this.options.max < this.options.to)
+      this.options.max = this.options.to
 
     return true
   }

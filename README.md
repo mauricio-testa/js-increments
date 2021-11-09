@@ -5,12 +5,20 @@ A small library with the logic needed to increment counters and progress bars
 ![Language](https://img.shields.io/github/languages/top/mauricio-testa/js-increments)
 ![Last commit](https://img.shields.io/github/last-commit/mauricio-testa/js-increments)
 
+
+See a [Demo](https://js-increments.netlify.app/)
+
+
 ## Installation
 
 ### Browser
 
 ```html
+<!-- self hosted -->
 <script src="PATH_TO_LIB/dist/index.min.js"></script>
+
+<!-- CDN -->
+<script src="https://cdn.jsdelivr.net/npm/js-increments@0.1.0/dist/index.min.js"></script>
 ```
 
 ### Node.js
@@ -42,9 +50,6 @@ counter.start();
 
 // or new jsIncrements(options).start()
 ```
-
-> If you think it is better to learn from examples, download this project to your computer and open `/examples/index.html`.
-
 ## Counter Options
 
 Option | Type | Default | Description
@@ -95,3 +100,16 @@ const target = {
   percentage: true
 },
 ```
+
+## Developer commands
+
+Run tests
+* `npm run test`
+
+
+Watch project 
+* `npm run watch`
+
+
+Build 
+* `npm run build`

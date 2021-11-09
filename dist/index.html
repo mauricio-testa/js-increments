@@ -113,11 +113,12 @@
     // text
     const counterText = new jsIncrements({
       from: 0,
-      to: 100,
+      to: 500,
       interval: 10,
       target: {
         selector: '#progressText',
         type: 'text',
+        percentage: false
       },
     });
 
@@ -127,7 +128,7 @@
       to: 100,
       max: 150,
       step: 10,
-      interval: 100,
+      interval: 500,
       wait: 1000,
       targets: [
         {
@@ -148,7 +149,7 @@
     const counterCircle = new jsIncrements({
       from: 10,
       to: 100,
-      interval: 400,
+      interval: 500,
       wait: 1000,
       step: 10,
       targets: [

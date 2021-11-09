@@ -42,6 +42,8 @@ class Counter {
 
     if (!this.valid) return;
 
+    this._destroyRelatedInstances()
+
     this._fireEvent('onStart')
 
     //start progress with `from` value
@@ -50,11 +52,11 @@ class Counter {
 
     // execute counter
     const vm = this
+
     setTimeout(function () {
-      var id = setInterval(function () {
+      vm.id = setInterval(function () {
         if (vm.counter === vm.options.to) {
-          clearInterval(id);
-          vm._fireEvent('onFinish')
+          vm.stop()
         } else {
           // `to` is not a multiple of `step`
           if (vm.options.to && (vm.counter + vm.options.step) > vm.options.to) {
@@ -66,7 +68,45 @@ class Counter {
           vm._updateElement()
         }
       }, vm.options.interval);
+
+      vm._registerInstance()
+
     }, vm.options.wait)
+  }
+
+  /**
+   * Stop the counter
+   */
+  stop() {
+    clearInterval(this.id);
+    this._fireEvent('onFinish')
+  }
+
+  /**
+   * If you have other running counters related to any target of this counter, 
+   * destroy the active instance
+   */
+
+  _destroyRelatedInstances() {
+    const instances = window.jsIncrementsInstances ?? []
+    instances.forEach((instance, index) => {
+      const instanceSelectors = instance.targets.map(i => i.options.selector)
+      if (this.targets.some(target => instanceSelectors.includes(target.options.selector))) {
+        window.jsIncrementsInstances.splice(index, 1);
+        instance.stop()
+      }
+    })
+  }
+
+  /**
+   * Register a new increments instance on a window
+   */
+
+  _registerInstance() {
+    if (typeof window.jsIncrementsInstances == 'undefined') {
+      window.jsIncrementsInstances = []
+    }
+    window.jsIncrementsInstances.push(this)
   }
 
   /**
@@ -77,7 +117,13 @@ class Counter {
     this._fireEvent('onUpdate')
 
     this.targets.forEach(target => {
-      target.update(this.counter)
+      // treatment if the element is removed from the DOM later
+      if (target.element) {
+        target.update(this.counter)
+      }
+      else {
+        this.stop()
+      }
     });
   }
 

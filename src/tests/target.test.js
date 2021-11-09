@@ -23,6 +23,6 @@ test('Invalid type', () => {
 
 test('No CSS prop provided', () => {
   document.body.innerHTML = '<div id="fake"></div>';
-  expect(() => jsIncrementsTarget({ type: 'css', selector: '#fake', property: false })).toThrow('INVALID_TARGET_TYPE');
+  expect(() => jsIncrementsTarget({ type: 'style', selector: '#fake', property: false })).toThrow('NO_CSS_PROPERTY_PROVIDED');
 });
 

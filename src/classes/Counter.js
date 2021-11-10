@@ -9,7 +9,7 @@ class Counter {
     const defaults = {
       from: 0,
       to: 100,
-      interval: 50,
+      duration: 5000,
       wait: 0,
       max: 100,
       step: 1,
@@ -54,6 +54,8 @@ class Counter {
     const vm = this
 
     setTimeout(function () {
+      const interval = (vm.options.duration / (vm.options.to - vm.options.from)) * vm.options.step 
+
       vm.id = setInterval(function () {
         if (vm.counter === vm.options.to) {
           vm.stop()
@@ -67,7 +69,7 @@ class Counter {
           }
           vm._updateElement()
         }
-      }, vm.options.interval);
+      }, interval);
 
       vm._registerInstance()
 
@@ -140,7 +142,7 @@ class Counter {
 
   get valid() {
 
-    const mustBeNumber = ['from', 'to', 'interval', 'wait', 'max', 'step']
+    const mustBeNumber = ['from', 'to', 'duration', 'wait', 'max', 'step']
     mustBeNumber.forEach(key => {
       if (isNaN(this.options[key])) {
         throw new Error(key.toUpperCase() + '_IS_NAN');

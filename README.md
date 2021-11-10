@@ -38,7 +38,7 @@ const counter = new jsIncrements({
   to: 100,
   max: 100,
   step: 1,
-  interval: 100, 
+  duration: 5000, 
   wait: 0,
   target: {
     selector: '#progressText',
@@ -56,8 +56,8 @@ Option | Type | Default | Description
 --- | --- | --- | --- |
 `from` | `Number` | 0 | The number that the counter should start
 `to` | `Number` |100 | The number that the counter must stop
-`interval` | `Number` | 50 | Time interval between increments
-`wait` | `Number` | 0 | Time to wait before starting
+`duration` | `Number` | 50 | Time duration of the animation (ms)
+`wait` | `Number` | 0 | Time to wait before starting (ms)
 `max` | `Number` | 100 | Reference to the maximum number of the counter. Useful when working with percentages
 `step` | `Number` | 1 | How many numbers to advance with each increment
 `target` | `Boolean` or `Object` | false | [See bellow](#target-options)

@@ -10,7 +10,6 @@ class Target {
       type: 'text',
       unit: '%',
       percentage: true,
-      animation: 'none',
     };
 
     this.counterOptions = counterOptions
@@ -31,18 +30,6 @@ class Target {
 
       case 'style':
         return function (value) {
-          if (this.options.animation == 'smooth') {
-            if (value == this.counterOptions.from) {
-              this.element.style.setProperty(this.options.property, this.counterOptions.from + this.options.unit);
-              const self = this;
-              setTimeout(() => {
-                self.element.style.setProperty('transition', `${self.counterOptions.duration}ms ${self.options.property} linear`);
-                self.element.style.setProperty(self.options.property, self.counterOptions.to + self.options.unit);
-              }, self.counterOptions.wait)
-              
-            }
-            return
-          }
           this.element.style.setProperty(this.options.property, (value * 100 / this.counterOptions.max) + this.options.unit);
         }
     }

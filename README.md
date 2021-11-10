@@ -80,7 +80,6 @@ Option | Type | Default | Description
 `type` | `String` | `'text'` | Kind of manipulation. `style` or `text`
 `property` | `String` | `'width'` | CSS property that must be changed (will be manipulated with `setProperty`)
 `unit` | `String` | `'%'` | CSS property unit
-`animation` | `String` | `none` | If set to `smooth`, it animates with CSS and updates the property only once. `none` will make each increment update the css property informed
 `percentage` | `Boolean` | `true` | Whether you want to display the number in percentage or the real number. For example: a progress bar containing the steps of a wizard that goes from 0 to 5. When you get halfway through the progress bar, do you want to display 3 or 50%?
 
 ### Example for manipulating a progress bar

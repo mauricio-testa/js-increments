@@ -48,13 +48,14 @@ class Counter {
 
     //start progress with `from` value
     this.counter = this.options.from;
-    this._updateElement()
 
     // execute counter
     const vm = this
 
     setTimeout(function () {
       const interval = (vm.options.duration / (vm.options.to - vm.options.from)) * vm.options.step 
+
+      vm._updateElement()
 
       vm.id = setInterval(function () {
         if (vm.counter === vm.options.to) {

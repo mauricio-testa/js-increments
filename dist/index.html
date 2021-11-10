@@ -7,10 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      transition: 1000ms;
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -124,16 +120,17 @@
 
     // bar and text
     const counterBar = new jsIncrements({
-      from: 20,
-      to: 100,
-      max: 150,
+      from: 0,
+      to: 90,
+      max: 100,
       step: 10,
-      duration: 5000,
-      wait: 1000,
+      duration: 10000,
+      wait: 0,
       targets: [
         {
           selector: '#progressBar #bar',
           property: 'width',
+          animation: 'smooth',
           type: 'style',
           unit: '%'
         },

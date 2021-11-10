@@ -33,8 +33,13 @@ class Target {
         return function (value) {
           if (this.options.animation == 'smooth') {
             if (value == this.counterOptions.from) {
-              this.element.style.setProperty('transition', `${this.counterOptions.duration}ms ${this.options.property} linear`);
-              this.element.style.setProperty(this.options.property, `${this.counterOptions.to}%`);
+              this.element.style.setProperty(this.options.property, this.counterOptions.from + this.options.unit);
+              const self = this;
+              setTimeout(() => {
+                self.element.style.setProperty('transition', `${self.counterOptions.duration}ms ${self.options.property} linear`);
+                self.element.style.setProperty(self.options.property, self.counterOptions.to + self.options.unit);
+              }, self.counterOptions.wait)
+              
             }
             return
           }

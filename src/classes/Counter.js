@@ -48,14 +48,12 @@ class Counter {
 
     //start progress with `from` value
     this.counter = this.options.from;
+    this._updateElement()
 
     // execute counter
     const vm = this
 
     setTimeout(function () {
-      const interval = (vm.options.duration / (vm.options.to - vm.options.from)) * vm.options.step 
-
-      vm._updateElement()
 
       vm.id = setInterval(function () {
         if (vm.counter === vm.options.to) {
@@ -70,7 +68,7 @@ class Counter {
           }
           vm._updateElement()
         }
-      }, interval);
+      }, vm.interval);
 
       vm._registerInstance()
 
@@ -139,6 +137,10 @@ class Counter {
     if (this.options.hasOwnProperty(event) && typeof this.options[event] == 'function') {
       this.options[event](this)
     }
+  }
+
+  get interval() {
+    return (this.options.duration / (this.options.to - this.options.from)) * this.options.step 
   }
 
   get valid() {

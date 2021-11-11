@@ -46,7 +46,7 @@ class Counter {
 
     this._fireEvent('onStart')
 
-    //start progress with `from` value
+    // start progress with `from` value
     this.counter = this.options.from;
     this._updateElement()
 
@@ -54,7 +54,16 @@ class Counter {
     const vm = this
 
     setTimeout(function () {
-      const interval = (vm.options.duration / (vm.options.to - vm.options.from)) * vm.options.step 
+
+      /**
+       * The minimum interval accepted by setTimeout is 10 ms. 
+       * If the calculated value is less than that, make an increment in the step to obey the duration
+       */
+      if (vm.interval < 10) {
+        const oldStep = vm.options.step
+        vm.options.step = 10 * vm.options.step / vm.interval
+        console.warn(`step overrided from ${oldStep} to ${vm.options.step}`)
+      }
 
       vm.id = setInterval(function () {
         if (vm.counter === vm.options.to) {
@@ -69,7 +78,7 @@ class Counter {
           }
           vm._updateElement()
         }
-      }, interval);
+      }, vm.interval);
 
       vm._registerInstance()
 
@@ -138,6 +147,10 @@ class Counter {
     if (this.options.hasOwnProperty(event) && typeof this.options[event] == 'function') {
       this.options[event](this)
     }
+  }
+
+  get interval() {
+    return (this.options.duration / (this.options.to - this.options.from)) * this.options.step 
   }
 
   get valid() {

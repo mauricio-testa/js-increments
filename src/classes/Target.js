@@ -25,7 +25,7 @@ class Target {
       case 'text':
         return function (value) {
           const _value = this.options.percentage ? (value * 100 / this.counterOptions.max) : value
-          this.element.textContent = `${Math.round(_value)}${this.options.percentage ? '%' : ''}`
+          this.element.textContent = `${Math.round(_value).toLocaleString()}${this.options.percentage ? '%' : ''}`
         }
 
       case 'style':

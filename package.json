@@ -1,6 +1,6 @@
 {
   "name": "js-increments",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "A small library with the logic needed to increment counters and progress bars",
   "homepage": "https://github.com/mauricio-testa/js-increments",

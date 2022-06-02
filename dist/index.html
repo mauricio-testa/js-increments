@@ -68,7 +68,7 @@
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
       stroke: #4CAF50;
-
+      transition: inherit;
       stroke-dasharray: var(--circunference);
       stroke-dashoffset: calc(var(--circunference) - var(--progress-percent) / 100 * var(--circunference));
     }
@@ -90,7 +90,7 @@
     <div id="text"></div>
 
     <h1>Progress Circle</h1>
-    <svg id="progressCircle" class="progress-ring" style="--radius: 59" width="150" height="150">
+    <svg id="progressCircle" class="progress-ring" style="--radius: 59; --progress-percent:0;" width="150" height="150">
       <!-- 
 				r = (width / 2) - (strokeWidth * 2)
 				r = (200 / 2) - (10 * 2) = 100 - 20 = 80 
@@ -109,8 +109,10 @@
     // text
     const counterText = new jsIncrements({
       from: 0,
-      to: 500,
-      duration: 5000,
+      to: 90,
+      step: 2,
+      duration: 3000,
+      wait: 2000,
       target: {
         selector: '#progressText',
         type: 'text',
@@ -122,16 +124,16 @@
     const counterBar = new jsIncrements({
       from: 0,
       to: 90,
-      max: 100,
-      step: 10,
-      duration: 10000,
-      wait: 0,
+      step: 2,
+      duration: 3000,
+      wait: 2000,
       targets: [
         {
           selector: '#progressBar #bar',
           property: 'width',
           type: 'style',
-          unit: '%'
+          unit: '%',
+          mode: 'performance'
         },
         {
           selector: '#text',
@@ -143,17 +145,25 @@
 
     // circle and text
     const counterCircle = new jsIncrements({
-      from: 10,
-      to: 100,
-      duration: 5000,
-      wait: 1000,
-      step: 10,
+      from: 0,
+      to: 90,
+      step: 2,
+      duration: 3000,
+      wait: 2000,
       targets: [
         {
           selector: '#progressCircle',
           property: '--progress-percent',
           type: 'style',
-          unit: null
+          unit: null,
+          mode: 'performance'
+        },
+        {
+          selector: '#progressCircle',
+          property: 'stroke-dashoffset',
+          type: 'style',
+          unit: null,
+          mode: 'performance'
         },
         {
           selector: '#progressCircle text',
@@ -180,7 +190,9 @@
 
     run()
 
-    document.getElementById('restart').addEventListener("click", run)
+    document.getElementById('restart').addEventListener("click", function(){
+      location.reload()
+    })
 
 
   </script>

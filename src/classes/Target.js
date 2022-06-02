@@ -10,6 +10,7 @@ class Target {
       type: 'text',
       unit: '%',
       percentage: true,
+      mode: 'precision',
     };
 
     this.counterOptions = counterOptions
@@ -30,7 +31,17 @@ class Target {
 
       case 'style':
         return function (value) {
-          this.element.style.setProperty(this.options.property, (value * 100 / this.counterOptions.max) + this.options.unit);
+          if (this.options.mode == 'performance') {
+            if (value == (this.counterOptions.from + this.counterOptions.step)) {
+              this.element.style.setProperty('transition-property', this.options.property);
+              this.element.style.setProperty('transition-duration', this.counterOptions.duration+'ms');
+              this.element.style.setProperty('transition-timing-function', 'linear');
+              this.element.style.setProperty(this.options.property, this.counterOptions.to + this.options.unit);
+            }
+          }
+          else {
+            this.element.style.setProperty(this.options.property, (value * 100 / this.counterOptions.max) + this.options.unit);
+          }
         }
     }
   }

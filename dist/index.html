@@ -90,12 +90,7 @@
     <div id="text"></div>
 
     <h1>Progress Circle</h1>
-    <svg id="progressCircle" class="progress-ring" style="--radius: 59; --progress-percent:0;" width="150" height="150">
-      <!-- 
-				r = (width / 2) - (strokeWidth * 2)
-				r = (200 / 2) - (10 * 2) = 100 - 20 = 80 
-				r = (150 / 2) - (8 * 2) = 75 - 16 = 59
-			-->
+    <svg id="progressCircle" style="--radius: 59; --progress-percent:0;" width="150" height="150">
       <circle stroke="white" stroke-width="8" fill="transparent" r="59" cx="50%" cy="50%" />
       <text x="50%" y="50%" text-anchor="middle" fill="#4CAF50" style="font-size: 30px;" dy=".3em">0</text>
     </svg>

@@ -33,10 +33,13 @@ class Target {
         return function (value) {
           if (this.options.mode == 'performance') {
             if (value == (this.counterOptions.from + this.counterOptions.step)) {
+              const _width = this.options.percentage ? (100 * this.counterOptions.to / this.counterOptions.max) : this.counterOptions.to;
+
               this.element.style.setProperty('transition-property', this.options.property);
               this.element.style.setProperty('transition-duration', this.counterOptions.duration+'ms');
               this.element.style.setProperty('transition-timing-function', 'linear');
-              this.element.style.setProperty(this.options.property, this.counterOptions.to + this.options.unit);
+
+              this.element.style.setProperty(this.options.property, _width + this.options.unit);
             }
           }
           else {
@@ -64,7 +67,7 @@ class Target {
       throw new Error('SELECTOR_NOT_FOUND');
 
     if (!this.element)
-      throw new Error('NO_DOM_ELEMENT_FOUND_FOR_THE_SELECTOR');
+      throw new Error('NO_DOM_ELEMENT_FOUND_FOR_THE_SELECTOR ' + this.options.selector);
 
     if (!['text', 'style'].includes(this.options.type))
       throw new Error('INVALID_TARGET_TYPE');

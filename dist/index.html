@@ -5,69 +5,109 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Js Increments Demo</title>
   <style>
-    body {
+    :root {
+      --primary: #141926;
+      --secondary: orange;
+    }
+
+    html body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #d5d5d5;
+      background-color: #f6f8fa;
+      text-align: center;
+    }
+
+    body header h1 {
+      color: var(--primary);
+    }
+
+    body header input#color {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
     }
 
     body main {
-      background-color: #141926;
       color: #fff;
       margin: 1rem 20%;
       padding: 2rem 10%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 80%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    body main>div {
+      width: 100%;
+      background-color: var(--primary);
+      color: #fff;
+      margin: 1rem 20%;
+      padding: 2rem 10%;
       box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 30%);
     }
 
-    h1,
-    button {
-      margin: 2rem;
+    body main>div h2 {
+      margin: unset;
     }
 
-    body main h1 {
-      font-size: 1.5rem;
+    body main>div summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 15px;
     }
 
-    button#restart {
-      padding: 15px 25px;
-      background-color: #4CAF50;
-      border: none;
-      color: #fff;
-      font-weight: bold;
+    body main>div summary span {
+      text-decoration: underline;
       cursor: pointer;
+      color: var(--secondary);
     }
 
-    #progressText {
+    body main>div pre {
+      text-align: left;
+      background: linear-gradient(90deg, #323232, transparent);
+    }
+    body main>div code {
+      margin-left: -50px;
+      display: block;
+    }
+
+    /** counter */
+
+    #counter {
       font-size: 2rem;
-      color: #4CAF50;
+      color: var(--secondary);
     }
 
-    #progressBar {
-      width: 400px;
+    /** bar */
+
+    #progress-bar {
       height: 20px;
       position: relative;
       background-color: rgb(168, 167, 167);
       margin-bottom: 5px;
     }
 
-    #progressBar #bar {
-      background-color: #4CAF50;
+    #progress-bar #bar {
+      background-color: var(--secondary);
       width: 0;
       height: 20px;
       position: absolute;
     }
 
-    #progressCircle circle {
+    /** radial */
+
+    #radial-progress circle {
       --circunference: calc(var(--radius) * 2 * 3.14);
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
-      stroke: #4CAF50;
+      stroke: var(--secondary);
       transition: inherit;
       stroke-dasharray: var(--circunference);
       stroke-dashoffset: calc(var(--circunference) - var(--progress-percent) / 100 * var(--circunference));
@@ -80,22 +120,116 @@
 
   <main>
 
-    <h1>Only text</h1>
-    <div id="progressText"></div>
+    <header>
+      <h1>Js Increments Demo</h1>
+      <a href="https://github.com/mauricio-testa/js-increments" target="_blank">Github</a>
+      <input type="color" name="color" id="color" value="#ffa500">
+    </header>
 
-    <h1>Progress Bar</h1>
-    <div id="progressBar">
-      <div id="bar"></div>
+    <div>
+      <details>
+        <summary>
+          <h2>Counter</h2>
+          <span>Code</span>
+        </summary>
+        <pre>
+          <code>
+          new jsIncrements({
+            from: 0,
+            to: 90,
+            step: 2,
+            duration: 3000,
+            target: {
+              selector: '#counter',
+              type: 'text',
+              percentage: false
+            },
+          }).start();
+        </code>
+        </pre>
+      </details>
+
+      <div id="counter"></div>
     </div>
-    <div id="text"></div>
 
-    <h1>Progress Circle</h1>
-    <svg id="progressCircle" style="--radius: 59; --progress-percent:0;" width="150" height="150">
-      <circle stroke="white" stroke-width="8" fill="transparent" r="59" cx="50%" cy="50%" />
-      <text x="50%" y="50%" text-anchor="middle" fill="#4CAF50" style="font-size: 30px;" dy=".3em">0</text>
-    </svg>
+    <div>
+      <details>
+        <summary>
+          <h2>Progress Bar</h2>
+          <span>Code</span>
+        </summary>
+        <pre>
+          <code>
+          new jsIncrements({
+            from: 0,
+            to: 15,
+            step: 1,
+            max: 30,
+            duration: 3000,
+            wait: 1000,
+            targets: [
+              {
+                selector: '#progress-bar #bar',
+                property: 'width',
+                type: 'style',
+                unit: '%',
+                mode: 'performance'
+              },
+              {
+                selector: '#progress-bar-counter',
+                type: 'text',
+                percentage: false
+              }
+            ],
+          }).start();
+        </code>
+        </pre>
+      </details>
 
-    <button id="restart">Restart</button>
+      <div id="progress-bar">
+        <div id="bar"></div>
+      </div>
+      <div id="progress-bar-counter"></div>
+    </div>
+
+
+    <div>
+      <details>
+        <summary>
+          <h2>Radial progress</h2>
+          <span>Code</span>
+        </summary>
+        <pre>
+          <code>
+        new jsIncrements({
+          from: 0,
+          to: 90,
+          step: 2,
+          duration: 3000,
+          wait: 2000,
+          targets: [
+            {
+              selector: '#radial-progress',
+              property: '--progress-percent',
+              type: 'style',
+              unit: null,
+            },
+            {
+              selector: '#radial-progress text',
+              type: 'text',
+              percentage: true
+            }
+          ],
+        }).start();
+      </code>
+        </pre>
+      </details>
+
+      <svg id="radial-progress" style="--radius: 59; --progress-percent:0;" width="150" height="150">
+        <circle stroke="white" stroke-width="8" fill="transparent" r="59" cx="50%" cy="50%" />
+        <text x="50%" y="50%" text-anchor="middle" fill="var(--secondary)" style="font-size: 30px;" dy=".3em">0</text>
+      </svg>
+    </div>
   </main>
 
   <script src="./index.min.js"></script>
@@ -107,9 +241,8 @@
       to: 90,
       step: 2,
       duration: 3000,
-      wait: 2000,
       target: {
-        selector: '#progressText',
+        selector: '#counter',
         type: 'text',
         percentage: false
       },
@@ -118,22 +251,23 @@
     // bar and text
     const counterBar = new jsIncrements({
       from: 0,
-      to: 90,
-      step: 2,
+      to: 15,
+      step: 1,
+      max: 30,
       duration: 3000,
-      wait: 2000,
+      wait: 1000,
       targets: [
         {
-          selector: '#progressBar #bar',
+          selector: '#progress-bar #bar',
           property: 'width',
           type: 'style',
           unit: '%',
           mode: 'performance'
         },
         {
-          selector: '#text',
+          selector: '#progress-bar-counter',
           type: 'text',
-          percentage: true
+          percentage: false
         }
       ],
     });
@@ -147,21 +281,13 @@
       wait: 2000,
       targets: [
         {
-          selector: '#progressCircle',
+          selector: '#radial-progress',
           property: '--progress-percent',
           type: 'style',
           unit: null,
-          mode: 'performance'
         },
         {
-          selector: '#progressCircle',
-          property: 'stroke-dashoffset',
-          type: 'style',
-          unit: null,
-          mode: 'performance'
-        },
-        {
-          selector: '#progressCircle text',
+          selector: '#radial-progress text',
           type: 'text',
           percentage: true
         }
@@ -185,10 +311,10 @@
 
     run()
 
-    document.getElementById('restart').addEventListener("click", function(){
-      location.reload()
-    })
-
+    colorpicker = document.getElementById('color');
+    colorpicker.addEventListener('input', () => {
+      document.documentElement.style.setProperty('--secondary', colorpicker.value);
+    });
 
   </script>
 </body>

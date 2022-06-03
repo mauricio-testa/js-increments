@@ -81,7 +81,7 @@ Option | Type | Default | Description
 `property` | `String` | `'width'` | CSS property that must be changed (will be manipulated with `setProperty`)
 `unit` | `String` | `'%'` | CSS property unit
 `percentage` | `Boolean` | `true` | Whether you want to display the number in percentage or the real number. For example: a progress bar containing the steps of a wizard that goes from 0 to 5. When you get halfway through the progress bar, do you want to display 3 or 50%?
-`mode` | `String` | `'precision'` | If set to `precision`, each increment will generate a DOM update. This mode requires more processing. <br> If set to `performance`, only an initial update is performed and the effect happens through CSS (transition-property and transition-duration). This option is more performant, however it is not possible to execute the "step" timer property when it is active
+`mode` | `String` | `'precision'` | If set to `precision`, each increment will generate a DOM update. This mode requires more processing. <br> If set to `performance`, only an initial update is performed and the effect happens through CSS (transition-property and transition-duration).
 
 ### Example for manipulating a progress bar
 ```js

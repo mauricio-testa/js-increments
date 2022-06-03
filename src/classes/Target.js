@@ -34,12 +34,14 @@ class Target {
           if (this.options.mode == 'performance') {
             if (value == this.counterOptions.from) {
 
+              const _from = this.options.percentage ? (100 * this.counterOptions.from / this.counterOptions.max) : this.counterOptions.from
+              const _width = this.options.percentage ? (100 * this.counterOptions.to / this.counterOptions.max) : this.counterOptions.to;
+
               // initialize with "from" value
               this.element.style.setProperty('transition', 'unset');
-              this.element.style.setProperty(this.options.property, this.counterOptions.from + this.options.unit);
+              this.element.style.setProperty(this.options.property, _from + this.options.unit);
 
               setTimeout(() => {
-                const _width = this.options.percentage ? (100 * this.counterOptions.to / this.counterOptions.max) : this.counterOptions.to;
 
                 // after, update width and starts the animation
                 this.element.style.setProperty('transition-property', this.options.property);

@@ -33,7 +33,6 @@
     body main {
       color: #fff;
       margin: 1rem 20%;
-      padding: 2rem 10%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -47,7 +46,7 @@
       background-color: var(--primary);
       color: #fff;
       margin: 1rem 20%;
-      padding: 2rem 10%;
+      padding: 1.5rem 10%;
       box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 30%);
     }
 
@@ -59,7 +58,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       gap: 15px;
     }
 
@@ -76,6 +75,20 @@
     body main>div code {
       margin-left: -50px;
       display: block;
+    }
+
+    body main button#restart {
+      background-color: var(--secondary);
+      color: var(--primary);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      transition: 1s background-color;
+    }
+    body main button#restart:hover {
+      background-color: var(--primary);
+      color: var(--secondary);
     }
 
     /** counter */
@@ -161,12 +174,12 @@
         <pre>
           <code>
           new jsIncrements({
-            from: 0,
-            to: 15,
-            step: 1,
-            max: 30,
+            from: 50,
+            to: 70,
+            step: 10,
+            max: 100,
             duration: 3000,
-            wait: 1000,
+            wait: 3000,
             targets: [
               {
                 selector: '#progress-bar #bar',
@@ -230,6 +243,8 @@
         <text x="50%" y="50%" text-anchor="middle" fill="var(--secondary)" style="font-size: 30px;" dy=".3em">0</text>
       </svg>
     </div>
+
+    <button id="restart">Restart</button>
   </main>
 
   <script src="./index.min.js"></script>
@@ -250,12 +265,12 @@
 
     // bar and text
     const counterBar = new jsIncrements({
-      from: 0,
-      to: 15,
-      step: 1,
-      max: 30,
+      from: 50,
+      to: 70,
+      step: 10,
+      max: 100,
       duration: 3000,
-      wait: 1000,
+      wait: 3000,
       targets: [
         {
           selector: '#progress-bar #bar',
@@ -310,6 +325,8 @@
     }
 
     run()
+
+    document.getElementById('restart').addEventListener("click", run)
 
     colorpicker = document.getElementById('color');
     colorpicker.addEventListener('input', () => {

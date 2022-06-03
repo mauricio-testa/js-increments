@@ -32,14 +32,23 @@ class Target {
       case 'style':
         return function (value) {
           if (this.options.mode == 'performance') {
-            if (value == (this.counterOptions.from + this.counterOptions.step)) {
-              const _width = this.options.percentage ? (100 * this.counterOptions.to / this.counterOptions.max) : this.counterOptions.to;
+            if (value == this.counterOptions.from) {
 
-              this.element.style.setProperty('transition-property', this.options.property);
-              this.element.style.setProperty('transition-duration', this.counterOptions.duration+'ms');
-              this.element.style.setProperty('transition-timing-function', 'linear');
+              // initialize with "from" value
+              this.element.style.setProperty('transition', 'unset');
+              this.element.style.setProperty(this.options.property, this.counterOptions.from + this.options.unit);
 
-              this.element.style.setProperty(this.options.property, _width + this.options.unit);
+              setTimeout(() => {
+                const _width = this.options.percentage ? (100 * this.counterOptions.to / this.counterOptions.max) : this.counterOptions.to;
+
+                // after, update width and starts the animation
+                this.element.style.setProperty('transition-property', this.options.property);
+                this.element.style.setProperty('transition-duration', this.counterOptions.duration+'ms');
+                this.element.style.setProperty('transition-delay', this.counterOptions.wait+'ms');
+                this.element.style.setProperty('transition-timing-function', 'linear');
+
+                this.element.style.setProperty(this.options.property, _width + this.options.unit);
+              }, 10)
             }
           }
           else {
